@@ -16,6 +16,17 @@ class Event extends Model
         'datetime',
         'place',
         'description',
+        'user_id'
     ];
+    
+    public function user()
+    {
+    return $this->belongsTo(User::class);
+    }
+    
+    public function userCanEdit(User $user)
+    {
+        return $this->user_id === $user->id;
+    }
 
 }

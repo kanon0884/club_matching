@@ -37,6 +37,9 @@
                 <textarea id="description" name="event[description]" rows="4" required></textarea>
             </div>
             
+            <!-- user_id 値を提供する非表示のフィールド -->
+            <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+            
             <!-- 送信ボタン -->
             <button type="submit" value="store">登録</button>
         </form>
