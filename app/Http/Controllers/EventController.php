@@ -77,13 +77,18 @@ class EventController extends Controller
     public function event_results(Request $request)
     {
         $keyword = $request->input('keyword');
-    
-        $events = Event::where('title', 'like', "%$keyword%")
-                       ->orWhere('place', 'like', "%$keyword%")
-                       ->orWhereHas('user', function($query) use ($keyword) {
-                           $query->where('club', 'like', "%$keyword%");
-                       })
-                       ->get();
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+        
+        $events = Event::where(function ($query) use ($keyword) {
+            $query->where('title', 'like', "%$keyword%")
+                  ->orWhere('place', 'like', "%$keyword%")
+                  ->orWhereHas('user', function ($query) use ($keyword) {
+                      $query->where('club', 'like', "%$keyword%");
+                  });
+        })
+        ->whereBetween('datetime', [$start_date, $end_date])
+        ->get();
     
         return view('events.event_search_results', compact('events'));
     }
