@@ -23,8 +23,17 @@
             <input type="text" name="query" placeholder="イベントを検索">
             <button type="submit">検索</button>
         </form>
-        <p>・サークル名、イベント名、場所のキーワードを検索できます。</p>
-        <p>・日時は2000-01-01の形式で検索してください。</p>
+        <p>サークル名orイベント名or場所のキーワードを入力してください！</p>
+        <form action="/events/search/results" method="GET">
+            @csrf
+            <label for="start_date">開始日:</label>
+            <input type="date" name="start_date" id="start_date">
+        
+            <label for="end_date">終了日:</label>
+            <input type="date" name="end_date" id="end_date">
+        
+            <button type="submit">検索</button>
+        </form>
     </div>
 
 </body>
