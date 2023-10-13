@@ -12,7 +12,8 @@
             @foreach($events as $event)
                 <div class='event'>
                     <h2 class='title'>
-                        <a href="/events/{{ $event->id }}">{{ $event->title }} {{ $event->datetime }}</a>
+                        <a href="/events/{{ $event->id }}">【{{ $event->user->club }}】{{ $event->title }} {{ $event->datetime }}</a>
+                
                     </h2>
                     <form action="/events/{{ $event->id }}" id="form_{{ $event->id }}" method="post">
                         @csrf

@@ -20,7 +20,8 @@
 
 
     <h1 class="title">
-
+        
+        {{ $event->user->club }}
         {{ $event->title }}
 
     </h1>

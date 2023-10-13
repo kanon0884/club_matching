@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+
 use App\Models\Event;
 
 class EventController extends Controller
@@ -27,25 +30,28 @@ class EventController extends Controller
         return view('events/event_create');
     }
     
-    public function event_store(Request $request, Event $event)
-    {  
-        $input = $request['event'];
-       
-        // $input の中身がnullでないことを確認
-        if ($input) {
-            // モデルにデータを設定
-            $event->fill($input)->save();
     
-            // 登録後のリダイレクトなどの処理を追加
-            return redirect('/events/' . $event->id);
-        } else {
-            // 入力データがnullの場合、エラーメッセージを表示またはエラーハンドリングを行う
-            return back()->with('error', '入力データが不正です。');
-        }
+    public function event_store(Request $request)
+    {
+        // フォームからのデータを受け取り、新しいイベントを作成
+        $data = $request->input('event');
+        
+        // ログインユーザーの ID を 'user_id' フィールドに設定
+        $data['user_id'] = Auth::id();
+        
+        // イベントを作成
+        $event = new Event($data);
+        $event->save();
+        
+        return redirect('/events/' . $event->id);
     }
+
     
     public function event_edit(Event $event)
     {
+        if (Gate::denies('edit-event', $event)) {
+            return redirect()->route('events.index')->with('error', 'アクセスが拒否されました');
+        }
         return view('events/event_edit')->with(['event' => $event]);
     }
     
