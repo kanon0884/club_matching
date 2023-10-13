@@ -9,6 +9,7 @@
     <body>
         <h1><a href="/events">イベント一覧</h1>
         <h1><a href="/event/create">イベント登録</h1>
+        <h1><a href="/events/search">イベントを探す</h1>
         </div>
     </body>
 </html>
