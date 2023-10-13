@@ -23,7 +23,7 @@
             <input type="text" name="query" placeholder="イベントを検索">
             <button type="submit">検索</button>
         </form>
-        <p>・サークル名、イベント名、日時、場所のキーワードを検索できます。</p>
+        <p>・サークル名、イベント名、場所のキーワードを検索できます。</p>
         <p>・日時は2000-01-01の形式で検索してください。</p>
     </div>
 

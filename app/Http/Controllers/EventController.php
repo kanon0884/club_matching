@@ -69,4 +69,24 @@ class EventController extends Controller
         return redirect('/events');
     }
     
+    public function event_search()
+    {
+        return view('events.event_search');
+    }
+    
+    public function event_results(Request $request)
+    {
+        $keyword = $request->input('keyword');
+    
+        $events = Event::where('title', 'like', "%$keyword%")
+                       ->orWhere('place', 'like', "%$keyword%")
+                       ->orWhereHas('user', function($query) use ($keyword) {
+                           $query->where('club', 'like', "%$keyword%");
+                       })
+                       ->get();
+    
+        return view('events.event_search_results', compact('events'));
+    }
+
+    
 }
