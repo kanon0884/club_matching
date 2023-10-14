@@ -19,8 +19,9 @@ class EventPolicy
         //
     }
     
-    public function edit(User $user, Event $event)
+    public function editEvent(User $user, \App\Models\Event $event)
     {
-        return $user->userCanEdit($event);
+        return $user->id === $event->user_id;
     }
+
 }

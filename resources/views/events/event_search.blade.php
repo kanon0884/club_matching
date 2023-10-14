@@ -21,7 +21,6 @@
     <h1>イベント検索</h1>
         <form action="/events/search/results" method="GET">
             <input type="text" name="query" placeholder="イベントを検索">
-            <button type="submit">検索</button>
         </form>
         <p>サークル名orイベント名or場所のキーワードを入力してください！</p>
         <form action="/events/search/results" method="GET">
